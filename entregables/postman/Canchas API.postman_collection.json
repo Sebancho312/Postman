@@ -1,0 +1,37 @@
+{
+  "info": {
+    "_postman_id": "5f73f320-17be-47e4-9cb1-202canchasapi",
+    "name": "API Reserva de Canchas",
+    "description": "Colección para probar las rutas de apiCanchas. Configure baseUrl (por defecto http://localhost:3001) y canchaId con un registro existente. Para POST /reservas use una fecha futura y un horario disponible.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3001" },
+    { "key": "canchaId", "value": "1" },
+    { "key": "fechaReserva", "value": "2027-01-15" }
+  ],
+  "item": [
+    {
+      "name": "Estado de la API",
+      "item": [
+        { "name": "GET API activa", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/", "host": ["{{baseUrl}}"], "path": [""] } } }
+      ]
+    },
+    {
+      "name": "Canchas",
+      "item": [
+        { "name": "GET Listar canchas", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/canchas", "host": ["{{baseUrl}}"], "path": ["canchas"] } } },
+        { "name": "GET Buscar canchas", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/canchas?buscar=Ibarra&deporte=Fútbol", "host": ["{{baseUrl}}"], "path": ["canchas"], "query": [{ "key": "buscar", "value": "Ibarra" }, { "key": "deporte", "value": "Fútbol" }] } } },
+        { "name": "GET Detalle de cancha", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/canchas/{{canchaId}}", "host": ["{{baseUrl}}"], "path": ["canchas", "{{canchaId}}"] } } },
+        { "name": "GET Horarios disponibles", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/canchas/{{canchaId}}/disponibilidad?fecha={{fechaReserva}}&duracionHoras=1", "host": ["{{baseUrl}}"], "path": ["canchas", "{{canchaId}}", "disponibilidad"], "query": [{ "key": "fecha", "value": "{{fechaReserva}}" }, { "key": "duracionHoras", "value": "1" }] } } },
+        { "name": "POST Registrar cancha", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Cancha de prueba\",\n  \"deporte\": \"Fútbol\",\n  \"ubicacion\": \"Ibarra, Imbabura\",\n  \"capacidad\": 14,\n  \"precioPorHora\": 20\n}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/canchas", "host": ["{{baseUrl}}"], "path": ["canchas"] } } }
+      ]
+    },
+    {
+      "name": "Reservas",
+      "item": [
+        { "name": "POST Registrar reserva", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"canchaId\": {{canchaId}},\n  \"nombre\": \"Alex Rivera\",\n  \"correo\": \"alex.rivera@example.com\",\n  \"fecha\": \"{{fechaReserva}}\",\n  \"horaInicio\": \"08:00\",\n  \"duracionHoras\": 1,\n  \"numeroPersonas\": 8\n}", "options": { "raw": { "language": "json" } } }, "url": { "raw": "{{baseUrl}}/reservas", "host": ["{{baseUrl}}"], "path": ["reservas"] } } }
+      ]
+    }
+  ]
+}

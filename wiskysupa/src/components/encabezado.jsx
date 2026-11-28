@@ -1,79 +1,34 @@
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
-import { Link } from 'react-router-dom';
-
-function Encabezado({ titulo }) {
+function Encabezado() {
+    const [menuAbierto, setMenuAbierto] = useState(false);
+    const cerrarMenu = () => setMenuAbierto(false);
 
     return (
-
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-
-            <div className="container-fluid">
-
-                <Link className="navbar-brand" to="/inicio">
-                    Tienda
+        <header className="site-header">
+            <div className="site-width header-inner">
+                <Link className="brand" to="/" onClick={cerrarMenu} aria-label="Agencia de canchas, inicio">
+                    <span className="brand-mark" aria-hidden="true">AC</span>
+                    <span>Agencia de canchas</span>
                 </Link>
-
                 <button
-                    className="navbar-toggler"
+                    className="menu-toggle"
                     type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
+                    aria-expanded={menuAbierto}
+                    aria-controls="main-navigation"
+                    onClick={() => setMenuAbierto((abierto) => !abierto)}
                 >
-                    <span className="navbar-toggler-icon"></span>
+                    {menuAbierto ? "Cerrar" : "Menú"}
                 </button>
-
-                <div className="collapse navbar-collapse" id="navbarNav">
-
-                    <ul className="navbar-nav">
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/inicio">
-                                Inicio
-                            </Link>
-                        </li>
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/productos">
-                                Productos
-                            </Link>
-                        </li>
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/contactos">
-                                Contactos
-                            </Link>
-                        </li>
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/compras">
-                                Compras
-                            </Link>
-                        </li>
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/catalogo">
-                                Catalogo Web
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/Ofertas">
-                                Ofertas
-                            </Link>
-                        </li>
-
-                    </ul>
-
-                </div>
-
+                <nav id="main-navigation" className={`site-nav${menuAbierto ? " is-open" : ""}`} aria-label="Navegación principal">
+                    <NavLink to="/" end onClick={cerrarMenu}>Inicio</NavLink>
+                    <NavLink to="/canchas" onClick={cerrarMenu}>Canchas</NavLink>
+                    <NavLink to="/nueva" onClick={cerrarMenu}>Registrar cancha</NavLink>
+                </nav>
             </div>
-
-        </nav>
-
+        </header>
     );
-
 }
 
 export default Encabezado;
