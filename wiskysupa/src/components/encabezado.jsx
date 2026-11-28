@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import logoCanchas from "../assets/logo-canchas.jpg";
 
 function Encabezado() {
     const [menuAbierto, setMenuAbierto] = useState(false);
@@ -9,7 +10,7 @@ function Encabezado() {
         <header className="site-header">
             <div className="site-width header-inner">
                 <Link className="brand" to="/" onClick={cerrarMenu} aria-label="Agencia de canchas, inicio">
-                    <span className="brand-mark" aria-hidden="true">AC</span>
+                    <img className="brand-logo" src={logoCanchas} alt="" aria-hidden="true" />
                     <span>Agencia de canchas</span>
                 </Link>
                 <button

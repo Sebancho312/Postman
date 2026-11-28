@@ -43,15 +43,15 @@
     white-space: nowrap;
 }
 
-.brand-mark {
-    display: grid;
-    width: 28px;
-    height: 28px;
-    place-items: center;
+.brand-logo {
+    display: block;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 auto;
     border: 1px solid var(--forest);
-    color: var(--forest);
-    font-size: 10px;
-    letter-spacing: 0.04em;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .site-nav {
@@ -602,9 +602,9 @@
         font-size: 14px;
     }
 
-    .brand-mark {
-        width: 25px;
-        height: 25px;
+    .brand-logo {
+        width: 36px;
+        height: 36px;
     }
 
     .menu-toggle {
